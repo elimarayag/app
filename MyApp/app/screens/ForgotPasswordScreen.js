@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-export default function ForgotPasswordScreen({ onGoBack, onReset }) {
+export default function ForgotPasswordScreen({ onGoBack, onVerify }) { // onVerify prop added
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
 
@@ -11,10 +11,9 @@ export default function ForgotPasswordScreen({ onGoBack, onReset }) {
       return;
     }
 
-    // Simulating email submission
-    console.log(`Password reset email sent to: ${email}`);
+    console.log(`Verification code sent to: ${email}`);
     setError('');
-    onReset(); // Navigate to ResetPasswordScreen
+    onVerify(); // Navigate to VerificationScreen
   };
 
   return (

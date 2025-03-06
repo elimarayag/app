@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
+import VerificationScreen from '../screens/VerificationScreen'; // Import Verification Screen
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 
 export default function App() {
@@ -22,7 +23,13 @@ export default function App() {
       {currentPage === 'forgotPassword' && (
         <ForgotPasswordScreen 
           onGoBack={() => setCurrentPage('login')} 
-          onReset={() => setCurrentPage('resetPassword')}
+          onVerify={() => setCurrentPage('verification')} // Navigate to VerificationScreen
+        />
+      )}
+      {currentPage === 'verification' && (
+        <VerificationScreen 
+          onGoBack={() => setCurrentPage('forgotPassword')} 
+          onVerify={() => setCurrentPage('resetPassword')} // Navigate to ResetPasswordScreen
         />
       )}
       {currentPage === 'resetPassword' && (
