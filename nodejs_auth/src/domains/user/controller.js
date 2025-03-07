@@ -1,4 +1,4 @@
-const user = require("./model");
+const User = require("./model");
 const { hashData, verifyHashedData } = require("./../../utilities/hashData");
 const createToken = require("./../../utilities/createToken");
 
@@ -6,7 +6,7 @@ const authenticateUser = async (data) => {
     try {
         const { email, password } = data;
 
-        const fetchedUser = await user.findOne({email});
+        const fetchedUser = await User.findOne({email});
 
         if (!fetchedUser) {
             throw Error("Invalid credentials entered!");
@@ -42,7 +42,7 @@ const createNewUser = async (data) => {
         const { name, email, password } = data;
 
         //checking if user already exists
-        const existingUser = await user.findOne({email});
+        const existingUser = await User.findOne({email});
 
         if (existingUser) {
             throw Error("User with provided email already exists");
@@ -50,7 +50,7 @@ const createNewUser = async (data) => {
 
         //hash password
         const hashedPassword = await hashData(password);
-        const newUser = new user({
+        const newUser = new User({
             name,
             email,
             password: hashedPassword,
