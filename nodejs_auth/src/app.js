@@ -1,17 +1,19 @@
-//mongodb
+// MongoDB
 require("./config/db");
 
 const express = require("express");
-const bodyParser = express.json;
 const cors = require("cors");
-const routes = require("./routes");
+const routes = require("./routes"); // Ensure this exports valid routes
 
-//create server app
+// Create server app
 const app = express();
 
+// Middleware
 app.use(cors());
-app.use(bodyParser());
-app.use("/api/v1, routes");
-app.use(mainRoutes)
+app.use(express.json()); // Use express.json directly
 
+// Routes
+app.use("/api/v1", routes);  // Prefix for your routes
+
+// Export the app
 module.exports = app;
