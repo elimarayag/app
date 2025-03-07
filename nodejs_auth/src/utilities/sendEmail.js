@@ -1,4 +1,8 @@
+require('dotenv').config();
+
 const nodemailer = require("nodemailer");
+
+const { AUTH_EMAIL, AUTH_PASS } = process.env;
 
 let transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
@@ -13,7 +17,6 @@ transporter.verify((error, success) => {
     if (error) {
         console.log(error);
     }
-
     else {
         console.log("Ready for messages");
         console.log(success);
@@ -25,7 +28,6 @@ const sendEmail = async (mailOptions) => {
         await transporter.sendMail(mailOptions);
         return;
     }
-
     catch (error) {
         throw error;
     }

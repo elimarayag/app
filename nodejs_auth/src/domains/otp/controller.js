@@ -89,4 +89,4 @@ const deleteOTP = async(email) => {
     }
 };
 
-modules.export = { sendOTP, verifyOTP, deleteOTP };
+module.exports = { sendOTP, verifyOTP, deleteOTP };

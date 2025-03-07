@@ -1,5 +1,6 @@
 const User = require("./model");
 const { hashdata,verifyHashedData } = require("./../../utilities/hashData");
+const createToken = require("./../../utilities/createToken");
 
 const authenticateUser = async (data) => {
     try {
@@ -21,6 +22,14 @@ const authenticateUser = async (data) => {
         if (!passwordMatch) {
             throw Error("Invalid password entered!");
         }
+
+        //create user token
+        const tokenData = { userId: fetchedUser.id, email };
+        const token = await createToken(tokenData);
+
+        //assign user token
+        fetchedUser.token = token;
+        return fetchedUser;
     }
 
     catch (error) {
