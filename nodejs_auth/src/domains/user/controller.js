@@ -1,12 +1,12 @@
-const User = require("./model");
-const { hashdata,verifyHashedData } = require("./../../utilities/hashData");
+const user = require("./model");
+const { hashData, verifyHashedData } = require("./../../utilities/hashData");
 const createToken = require("./../../utilities/createToken");
 
 const authenticateUser = async (data) => {
     try {
         const { email, password } = data;
 
-        const fetchedUser = await User.findOne({email});
+        const fetchedUser = await user.findOne({email});
 
         if (!fetchedUser) {
             throw Error("Invalid credentials entered!");
@@ -50,7 +50,7 @@ const createNewUser = async (data) => {
 
         //hash password
         const hashedPassword = await hashData(password);
-        const newUser = new User({
+        const newUser = new user({
             name,
             email,
             password: hashedPassword,
